@@ -1,0 +1,49 @@
+[tool.briefcase]
+project_name = "When Last"
+bundle = "com.example"
+version = "0.0.1"
+url = "https://example.com/when_last"
+license = "BSD license"
+author = 'Lena Bartell'
+author_email = "lenabartell@gmail.com"
+
+[tool.briefcase.app.when_last]
+formal_name = "When Last"
+description = "When Did I Last?"
+icon = "src/when_last/resources/when_last"
+sources = ['src/when_last']
+requires = []
+
+
+[tool.briefcase.app.when_last.macOS]
+requires = [
+    'toga-cocoa>=0.3.0.dev20',
+]
+
+[tool.briefcase.app.when_last.linux]
+requires = [
+    'toga-gtk>=0.3.0.dev20',
+]
+system_requires = [
+    'libgirepository1.0-dev',
+    'libcairo2-dev',
+    'libpango1.0-dev',
+    'libwebkitgtk-3.0-0',
+    'gir1.2-webkit-3.0',
+]
+
+[tool.briefcase.app.when_last.windows]
+requires = [
+    'toga-winforms>=0.3.0.dev20',
+]
+
+# Mobile deployments
+[tool.briefcase.app.when_last.iOS]
+requires = [
+    'toga-iOS>=0.3.0.dev20',
+]
+
+[tool.briefcase.app.when_last.android]
+requires = [
+    'toga-android>=0.3.0.dev20',
+]
