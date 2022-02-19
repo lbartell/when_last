@@ -12,7 +12,11 @@ formal_name = "When Last"
 description = "When Did I Last?"
 icon = "src/when_last/resources/when_last"
 sources = ['src/when_last']
-requires = []
+requires = [
+    "toga-android",
+    "pydantic",
+    "platformdirs"
+]
 
 
 [tool.briefcase.app.when_last.macOS]

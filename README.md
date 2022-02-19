@@ -20,7 +20,7 @@ with `toga` ([docs](https://toga.readthedocs.io/en/latest/index.html)) for GUI a
 All commands from the `when_last` directory
 
 - Start project in developer mode: `briefcase dev`
-- Package for distribution (first time)
+- Package for distribution (first time or when dependencies chnage)
     1. Create config scaffolding: `briefcase create`
     1. Compile application: `briefcase build`
     1. [MacOS] Add permissions to run app: `codesign --force --deep --sign - "macOS/app/When Last/When Last.app"`

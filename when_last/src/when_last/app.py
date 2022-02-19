@@ -8,6 +8,7 @@ import toga
 from .model import WhenLastModel
 from .controller import WhenLastController
 from .view import WhenLastView
+from . import constants
 
 logging.basicConfig(
     format='%(asctime)s,%(msecs)d %(levelname)-8s [%(pathname)s:%(lineno)d] %(message)s',
@@ -29,7 +30,7 @@ class WhenLastApp(toga.App):
         """
         logger.info("Starting app")
 
-        model = WhenLastModel()
+        model = WhenLastModel.load(constants.SAVE_PATH)
         controller = WhenLastController(model=model)
         view = WhenLastView(
             model=model,
