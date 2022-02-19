@@ -1,31 +1,32 @@
 import datetime
+import dataclasses
 from uuid import UUID, uuid1
 from typing import Dict, List
 import logging
-from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 
 
-class Task(BaseModel):
+@dataclasses.dataclass
+class Task:
     name: str
     created: datetime.datetime = None
     uuid: UUID = None
-    execution_times: List[datetime.datetime] = []
+    execution_times: List[datetime.datetime] = dataclasses.field(default_factory=list)
 
-    def __init__(self, **data):
-        logger.info(f"Creating task: {data.get('name')}")
-        data["created"] = datetime.datetime.now()
-        data["uuid"] = uuid1()
-        super().__init__(**data)
+    def __post_init__(self):
+        logger.info(f"Creating task: {self.name}")
+        self.created = datetime.datetime.now()
+        self.uuid = uuid1()
 
     def execute(self):
         """Mark the task as executed at the current time"""
         self.execution_times.append(datetime.datetime.now())
 
 
-class WhenLastModel(BaseModel):
-    tasks: Dict[str, Task] = dict()
+@dataclasses.dataclass
+class WhenLastModel:
+    tasks: Dict[str, Task] = dataclasses.field(default_factory=dict)
 
     def add_task(self, task: Task):
         """Add a new task"""
