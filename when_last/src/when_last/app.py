@@ -29,15 +29,15 @@ class WhenLastApp(toga.App):
         """
         logger.info("Starting app")
 
-        self.model = WhenLastModel()
-        self.controller = WhenLastController(model=self.model)
-        self.view = WhenLastView(
-            model=self.model,
-            controller=self.controller
+        model = WhenLastModel()
+        controller = WhenLastController(model=model)
+        view = WhenLastView(
+            model=model,
+            controller=controller
         )
 
         self.main_window = toga.MainWindow(title=self.formal_name)
-        self.main_window.content = self.view.main_box
+        self.main_window.content = view.main_box
         self.main_window.show()
 
 

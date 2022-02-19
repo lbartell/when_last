@@ -11,7 +11,7 @@ class Task(BaseModel):
     name: str
     created: datetime.datetime = None
     uuid: UUID = None
-    times_executed: List[datetime.datetime] = []
+    execution_times: List[datetime.datetime] = []
 
     def __init__(self, **data):
         logger.info(f"Creating task: {data.get('name')}")
@@ -21,21 +21,20 @@ class Task(BaseModel):
 
     def execute(self):
         """Mark the task as executed at the current time"""
-        self.times_executed.append(datetime.datetime.now())
+        self.execution_times.append(datetime.datetime.now())
 
 
 class WhenLastModel(BaseModel):
     tasks: Dict[str, Task] = dict()
 
-    def add_task(self, name: str):
+    def add_task(self, task: Task):
         """Add a new task"""
-        logger.info(f"Adding task with name {name}")
-        if name in self.tasks:
+        if task.name in self.tasks:
             # if task already exists. do nothing
-            logger.info(f"Task {name} already exists, skipping creation")
+            logger.info(f"Task {task.name} already exists, skipping creation")
             return
-        logger.warning(f"Adding task with name: {name}")
-        self.tasks[name] = Task(name=name)
+        logger.warning(f"Adding task: {task}")
+        self.tasks[task.name] = task
 
     def execute_task(self, name: str):
         """Mark the given task as executed"""
